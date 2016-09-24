@@ -10,14 +10,18 @@ router(app);
 
 describe('todo router', () => {
   describe('GET /todo/list', () => {
+    let handler;
+
     beforeEach(() => {
       todoService.list.mockReturnValueOnce(Promise.resolve([{ id: 1, title: 'Read a book', completed: true }]));
     });
 
+    beforeEach(() => {
+      handler = supertest(app).get('/todo/list');
+    });
+
     it('should call todoService.list', (done) => {
-      supertest(app)
-        .get('/todo/list')
-        .expect(200)
+      handler.expect(200)
         .end((err, res) => {
           expect(todoService.list).toBeCalled();
           if (err) done.fail(err);
@@ -26,9 +30,7 @@ describe('todo router', () => {
     });
 
     it('should return list of todos in json format', (done) => {
-      supertest(app)
-        .get('/todo/list')
-        .expect(200)
+      handler.expect(200)
         .end((err, res) => {
           if (err) {
             console.error(err);
