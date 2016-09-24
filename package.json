@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --coverage",
     "test": "jest",
     "start": "node_modules/.bin/nodemon server.js"
   },
@@ -17,6 +17,7 @@
     "mysql": "^2.11.1"
   },
   "devDependencies": {
-    "jest": "^15.1.1"
+    "jest": "^15.1.1",
+    "supertest": "^2.0.0"
   }
 }
